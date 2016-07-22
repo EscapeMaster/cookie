@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	cookie
+	
+	<script>
+	//封装增加cookie的函数
+		document.cookie = 'name=zhangsan';
+		document.cookie = 'age=18';
+		document.cookie = 'height=165cm'
+		function addCookie(key, value ,expire){
+			var str = key + "=" + escape(value) + "; ";
+			var date = new Date();
+			date.setTime(date.getTime() + expire * 1000 * 60 * 60 * 24);
+			str +='expires=' + date.toUTCString();
+			document.cookie = str;
+		}
+		addCookie('name','shabi',4);
+		console.log(document.cookie);
+	//封装取到getCookie的函数
+		function getCookie(key){
+			var arrStr = document.cookie.split('; ');
+			for(var i=0; i<arrStr.length; i++){
+				var temp = arrStr[i].split('=');
+				if(temp[0] == key){
+					return unescape(temp[1]);
+				}
+			}
+		}
+		console.log(getCookie('name'));
+	//封装删除delCookie的函数
+		function delCookie(){
+			var date = new Date();
+			date.setTime(date.getTime() - 1000000);
+			document.cookie = key + '=asdf; expires=' + date.toUTCString();
+		}
+		addCookie('age','18',-1);
+		
+	</script>
+</body>
+</html>
